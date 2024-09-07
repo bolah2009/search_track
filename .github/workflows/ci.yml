@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   scan_ruby:
@@ -53,3 +53,63 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
+  js-lint:
+    runs-on: ubuntu-latest
+    name: Linter Checks for all Js, Json, yaml files
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      - name: Install required dependency for node
+        run: |
+          yarn install
+      - name: Run ESLint
+        run: |
+          yarn eslint:check
+      - name: Run Prettier
+        run: |
+          yarn format:check
+
+  rspec:
+    name: RSpec
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Setup RSpec
+        run: bundle install
+      - name: RSpec Report
+        env:
+          # The hostname used to communicate with the PostgreSQL service container
+          POSTGRES_HOST: localhost
+          # The default PostgreSQL port
+          POSTGRES_PORT: 5432
+          POSTGRES_PASSWORD: postgres
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          RAILS_ENV: test
+          DATABASE_URL: 'postgres://postgres:postgres@localhost:5432/migra_test'
+        run: |
+          bundle install
+          RAILS_ENV=test bundle exec rails db:create
+          RAILS_ENV=test bundle exec rails db:schema:load 
+          RAILS_ENV=test bundle exec rails assets:precompile
+          RAILS_ENV=test bundle exec rspec --force-color --format documentation

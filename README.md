@@ -141,7 +141,3 @@ rubocop -A
 ## 📝 License
 
 [MIT licensed](./LICENSE).
-
----
-
-This README provides a clear overview of the **Search Track** project, including its technologies, key features, setup instructions, and areas for improvement.

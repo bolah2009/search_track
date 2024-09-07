@@ -38,7 +38,7 @@ jobs:
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: bin/importmap audit
 
-  lint:
+  ruby_lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -53,7 +53,7 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
-  js-lint:
+  js_lint:
     runs-on: ubuntu-latest
     name: Linter Checks for all Js, Json, yaml files
     steps:

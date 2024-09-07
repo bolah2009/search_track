@@ -40,3 +40,5 @@
 /config/credentials/production.key
 
 coverage
+node_modules/
+/config/credentials/test.key

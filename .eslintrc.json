@@ -1,0 +1,18 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["google", "plugin:prettier/recommended"],
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["html"],
+  "rules": {
+    "require-jsdoc": 0
+  },
+  "ignorePatterns": ["public/", "coverage/", "config/tailwind.config.js", "**/node_modules/"]
+}

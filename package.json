@@ -1,0 +1,26 @@
+{
+  "name": "search_track",
+  "version": "0.0.1",
+  "engines": {
+    "node": "20.x",
+    "npm": "please-use-yarn"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/eslint-parser": "^7.17.0",
+    "eslint": "^8.13.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-html": "^7.1.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.0.3"
+  },
+  "scripts": {
+    "format": "npx prettier  --write \"**/*.{html,json,md,yaml,yml}\"",
+    "format:check": "npx prettier  --check \"**/*.{html,json,md,yaml,yml}\"",
+    "eslint": "npx eslint . --fix",
+    "eslint:check": "npx eslint ."
+  },
+  "packageManager": "yarn@1.22.19"
+}

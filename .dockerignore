@@ -46,3 +46,8 @@
 # Ignore Docker-related files
 /.dockerignore
 /Dockerfile*
+.eslintrc.json
+.prettierignore
+.prettierrc.js
+package.json
+yarn.lock

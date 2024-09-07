@@ -1,0 +1,63 @@
+<div data-controller="search" class="max-w-xl lg:max-w-4xl mx-auto mb-4">   
+  <label for="search-box"><h1 class="font-bold text-4xl mb-4">Search for your articles!</h1></label>
+  <div class="mb-4">
+    <input name="Search" type="search" data-ip-address="<%= request.remote_ip %>" id="search-box" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" required />
+  </div>
+
+  <!-- Analytics section -->
+  <div class="mb-4" data-controller="analytics" id="analytics">
+    <h3 class="font-bold text-2xl my-4">Search Analytics</h3>
+
+    <div id="top-queries-section" class="flex flex-col<%= @top_queries.empty? ? ' hidden' : '' %>">
+      <div class="-m-1.5 overflow-x-auto">
+        <div class="p-1.5 min-w-full inline-block align-middle">
+          <div class="overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+              <caption class="py-2 text-start text-gray-600 font-bold text-xl mb-2">List of top queries</caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Searches</th>
+                  <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Count</th>
+                </tr>
+              </thead>
+              <tbody  id="top-queries" class="divide-y divide-gray-200">
+                <% @top_queries.each do |query| %>
+                  <tr class="hover:bg-gray-100">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%=query[0]%></td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%=query[1]%></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="recent-queries-section" class="flex flex-col<%= @recent_queries.empty? ? ' hidden' : '' %>">
+      <div class="-m-1.5 overflow-x-auto">
+        <div class="p-1.5 min-w-full inline-block align-middle">
+          <div class="overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+              <caption class="py-2 text-start text-gray-600 font-bold text-xl mb-2">List of recent searches</caption>
+              <thead>
+                <tr>
+                  <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Searches</th>
+                  <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Time searched</th>
+                </tr>
+              </thead>
+              <tbody id="recent-queries" class="divide-y divide-gray-200">
+                <% @recent_queries.each do |query| %>
+                  <tr class="hover:bg-gray-100">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><%=query[0]%></td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800"><%=time_ago_in_words(query[1])%> ago</td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

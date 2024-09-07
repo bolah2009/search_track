@@ -28,6 +28,11 @@ module SearchTrack
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    # https://unfit-for.work/posts/2022/gcp-rails-remote-ip/
+    config.action_dispatch.trusted_proxies = [
+      "66.241.125.0/24" # fly.io proxy
+    ].map { |proxy| IPAddr.new(proxy) }
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

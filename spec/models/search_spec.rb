@@ -57,8 +57,8 @@ RSpec.describe Search do
 
   describe ".recent_queries_by_ip" do
     let(:ip_address) { "127.0.0.1" }
-    let(:query_1_created_at) { 2.days.ago }
-    let(:query_2_created_at) { 1.day.ago }
+    let(:query_1_created_at) { Time.parse("2024-09-06 11:45:12.194572000 +0000") }
+    let(:query_2_created_at) { Time.parse("2024-09-05 11:45:12.179815000 +0000") }
 
     before do
       create(:search, ip_address:, complete: true, query: "query1", created_at: query_1_created_at)
@@ -68,8 +68,8 @@ RSpec.describe Search do
     it "returns the 10 most recent queries for a given IP address" do
       recent_queries = described_class.recent_queries_by_ip(ip_address)
 
-      expect(recent_queries).to eq([["query2", query_2_created_at],
-                                    ["query1", query_1_created_at]])
+      expect(recent_queries).to eq([["query1", query_1_created_at],
+                                    ["query2", query_2_created_at]])
     end
 
     it "caches the result for 5 minutes" do

@@ -14,5 +14,11 @@
   "rules": {
     "require-jsdoc": 0
   },
-  "ignorePatterns": ["public/", "coverage/", "config/tailwind.config.js", "**/node_modules/"]
+  "ignorePatterns": [
+    "public/",
+    "vendor/",
+    "coverage/",
+    "config/tailwind.config.js",
+    "**/node_modules/"
+  ]
 }

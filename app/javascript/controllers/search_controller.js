@@ -17,9 +17,9 @@ export default class extends Controller {
     let searchSessionId = null;
     const ipAddress = searchInput.dataset.ipAddress; // Get the IP address from data attribute
     const newSearchChannel = searchChannel(ipAddress);
-    const completeSearch = newSearchChannel.completeSearch.bind(newSearchChannel)
-    const sendSearch = newSearchChannel.sendSearch.bind(newSearchChannel)
-    
+    const completeSearch = newSearchChannel.completeSearch.bind(newSearchChannel);
+    const sendSearch = newSearchChannel.sendSearch.bind(newSearchChannel);
+
     function startNewSearchSession() {
       searchSessionId = uuidv4();
     }
@@ -50,17 +50,17 @@ export default class extends Controller {
         searchInput.value = ''; // Reset input value
       }
     };
-    
+
     // Listen for keyup to check if user pressed Enter (13 is the Enter keycode)
     searchInput.addEventListener('keyup', (event) => {
-      if (event.keyCode === 13) { 
+      if (event.keyCode === 13) {
         finalizeSearch();
       }
     });
-    
+
     // Listen for blur event when the user changes focus
     searchInput.addEventListener('blur', finalizeSearch);
-    
+
     const debounceFinalization = debounce(finalizeSearch, 3000); // 3-second pause for completing query
     // Call debounce finalization on input
     searchInput.addEventListener('input', debounceFinalization);

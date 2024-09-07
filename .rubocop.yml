@@ -6,7 +6,7 @@ require:
   - rubocop-rails
   - rubocop-rspec
   - rubocop-rspec_rails
-  
+
 AllCops:
   NewCops: enable
   DisplayCopNames: true

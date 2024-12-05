@@ -30,7 +30,8 @@ module SearchTrack
 
     # https://unfit-for.work/posts/2022/gcp-rails-remote-ip/
     config.action_dispatch.trusted_proxies = [
-      "66.241.125.0/24" # fly.io proxy
+      "66.241.125.0/24", # fly.io proxy
+      "62.182.99.0/24"
     ].map { |proxy| IPAddr.new(proxy) }
 
     # Configuration for the application, engines, and railties goes here.
